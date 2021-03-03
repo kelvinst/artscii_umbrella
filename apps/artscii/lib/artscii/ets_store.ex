@@ -11,7 +11,7 @@ defmodule Artscii.EtsStore do
   def init, do: :ets.new(:canvases, [:named_table, :ordered_set, :public])
 
   @impl Store
-  def create(canvas) do 
+  def create(canvas) do
     if :ets.insert_new(:canvases, {canvas.id, canvas}) do
       {:ok, canvas}
     else
@@ -20,13 +20,13 @@ defmodule Artscii.EtsStore do
   end
 
   @impl Store
-  def save(canvas) do 
+  def save(canvas) do
     :ets.insert(:canvases, {canvas.id, canvas})
     {:ok, canvas}
   end
 
   @impl Store
-  def fetch(id) do 
+  def fetch(id) do
     case :ets.lookup(:canvases, id) do
       [{^id, canvas}] -> {:ok, canvas}
       [] -> {:error, :not_found}

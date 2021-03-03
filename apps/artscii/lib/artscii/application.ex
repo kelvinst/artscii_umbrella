@@ -12,7 +12,6 @@ defmodule Artscii.Application do
 
     Artscii.store().init()
 
-
     Supervisor.start_link(children, strategy: :one_for_one, name: Artscii.Supervisor)
   end
 end
