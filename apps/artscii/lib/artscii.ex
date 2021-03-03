@@ -7,27 +7,38 @@ defmodule Artscii do
   you sent:
 
       iex> Artscii.new_canvas("davinci")
-      %Artscii.Canvas{id: "davinci"}
+      {:ok, %Artscii.Canvas{id: "davinci"}}
 
   """
 
   alias Artscii.Canvas
 
-  @doc """
-  Creates a new `%Canvas{}` with the given `id`, persist and returns it
+  @typedoc "A canvas persistence store"
+  @type store :: atom()
 
-  Raises an `ArgumentError` if the `id` is already taken
+  @doc """
+  Returns the configured persistence store
+  """
+  @spec store() :: store()
+  def store, do: Application.get_env(:artscii, :store)
+
+  @doc """
+  Creates a new `%Canvas{}` with the given `id` and persists it
+
+  Returns `{:ok, canvas}` if it passes, or `{:error, :already_exists}`
+  if it already exists
 
   ## Examples
 
       iex> Artscii.new_canvas("picasso")
-      %Artscii.Canvas{id: "picasso"}
+      {:ok, %Artscii.Canvas{id: "picasso"}}
       
       iex> Artscii.new_canvas("picasso")
-      ** (ArgumentError) id "picasso" has already been taken
+      {:error, :already_exists}
       
   """
+  @spec new_canvas(Canvas.id()) :: Canvas.t()
   def new_canvas(id) do
-    %Canvas{id: id}
+    store().create(%Canvas{id: id})
   end
 end
