@@ -1,5 +1,5 @@
 defmodule ArtsciiTest do
-  use ExUnit.Case
+  use Artscii.StoreCase
 
   doctest Artscii
 

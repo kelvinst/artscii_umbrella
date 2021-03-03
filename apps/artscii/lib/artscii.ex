@@ -66,7 +66,7 @@ defmodule Artscii do
   Lists all saved canvases
 
   ## Examples
-  
+
       iex> Artscii.create_canvas("michelangelo")
       iex> Artscii.create_canvas("rafael")
       iex> Artscii.list_canvases()

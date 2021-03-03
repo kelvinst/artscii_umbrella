@@ -35,6 +35,12 @@ defmodule Artscii.EtsStore do
 
   @impl Store
   def list do
-    :ets.foldl(fn({_, canvas}, acc) -> [canvas | acc] end, [], :canvases)
+    :ets.foldl(fn {_, canvas}, acc -> [canvas | acc] end, [], :canvases)
+  end
+
+  @impl Store
+  def clear do
+    :ets.delete_all_objects(:canvases)
+    :ok
   end
 end

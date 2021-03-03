@@ -35,8 +35,14 @@ defmodule Artscii.DetsStore do
 
   @impl Store
   def list do
-    fn({_, canvas}, acc) -> [canvas | acc] end
+    fn {_, canvas}, acc -> [canvas | acc] end
     |> :dets.foldl([], :canvases)
     |> Enum.sort_by(&Map.get(&1, :id))
+  end
+
+  @impl Store
+  def clear do
+    :ets.delete_all_objects(:canvases)
+    :ok
   end
 end

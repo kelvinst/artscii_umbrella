@@ -44,4 +44,9 @@ defmodule Artscii.Store do
   Lists all canvases that are saved on the store.
   """
   @callback list() :: [Canvas.t()]
+
+  @doc """
+  Clears all canvases from the store.
+  """
+  @callback clear() :: :ok
 end
