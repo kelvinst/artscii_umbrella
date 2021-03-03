@@ -9,7 +9,7 @@
 # move said applications out of the umbrella.
 use Mix.Config
 
-
+config :artscii, store: Artscii.EtsStore
 
 config :artscii_web,
   generators: [context_app: :artscii]
