@@ -12,5 +12,8 @@ defmodule Artscii.Canvas do
   @typedoc "The canvas struct"
   @type t :: %Canvas{id: id()}
 
-  defstruct [:id]
+  @width 20
+  @height 20
+
+  defstruct [:id, width: @width, height: @height, drawing_operations: []]
 end
