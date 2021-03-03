@@ -48,7 +48,7 @@ defmodule Artscii do
   no canvas with the `id` does not exist
 
   ## Examples
-  
+
       iex> Artscii.create_canvas("aleijadinho")
       iex> Artscii.fetch_canvas("aleijadinho")
       {:ok, %Artscii.Canvas{id: "aleijadinho"}}

@@ -8,7 +8,7 @@ defmodule Artscii.DetsStore do
   @behaviour Store
 
   @impl Store
-  def init, do: :dets.open_file(:canvases, [file: 'canvases.dets', type: :set])
+  def init, do: :dets.open_file(:canvases, file: 'canvases.dets', type: :set)
 
   @impl Store
   def create(canvas) do
