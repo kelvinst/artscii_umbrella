@@ -8,7 +8,7 @@ defmodule Artscii.EtsStore do
   @behaviour Store
 
   @impl Store
-  def init, do: :ets.new(:canvases, [:named_table, :set, :public])
+  def init, do: :ets.new(:canvases, [:named_table, :ordered_set, :public])
 
   @impl Store
   def create(canvas) do
@@ -31,5 +31,10 @@ defmodule Artscii.EtsStore do
       [{^id, canvas}] -> {:ok, canvas}
       [] -> {:error, :not_found}
     end
+  end
+
+  @impl Store
+  def list do
+    :ets.foldl(fn({_, canvas}, acc) -> [canvas | acc] end, [], :canvases)
   end
 end

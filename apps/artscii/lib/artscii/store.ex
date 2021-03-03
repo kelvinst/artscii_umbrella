@@ -39,4 +39,9 @@ defmodule Artscii.Store do
   Returns `{:ok, canvas}` if found, or `{:error, :not_found}` if not
   """
   @callback fetch(Canvas.id()) :: {:ok, Canvas.t()} | {:error, :not_found}
+
+  @doc """
+  Lists all canvases that are saved on the store.
+  """
+  @callback list() :: [Canvas.t()]
 end

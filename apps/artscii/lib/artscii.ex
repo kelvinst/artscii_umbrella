@@ -23,9 +23,9 @@ defmodule Artscii do
   def store, do: Application.get_env(:artscii, :store)
 
   @doc """
-  Creates a new `%Canvas{}` with the given `id` and persists it
+  Creates a new canvas with the given `id` and persists it
 
-  Returns `{:ok, canvas}` if it passes, or `{:error, :already_exists}`
+  Returns `{:ok, %Canvas{}}` if it passes, or `{:error, :already_exists}`
   if it already exists
 
   ## Examples
@@ -42,9 +42,9 @@ defmodule Artscii do
   end
 
   @doc """
-  Gets an existing `%Canvas{}` by its `id`
+  Gets an existing canvas by its `id`
 
-  Returns `{:ok, canvas}` if it passes, or `{:error, :not_found}` if 
+  Returns `{:ok, %Canvas{}}` if it passes, or `{:error, :not_found}` if 
   no canvas with the `id` does not exist
 
   ## Examples
@@ -60,5 +60,20 @@ defmodule Artscii do
   @spec fetch_canvas(Canvas.id()) :: {:ok, Canvas.t()} | {:error, :not_found}
   def fetch_canvas(id) do
     store().fetch(id)
+  end
+
+  @doc """
+  Lists all saved canvases
+
+  ## Examples
+  
+      iex> Artscii.create_canvas("michelangelo")
+      iex> Artscii.create_canvas("rafael")
+      iex> Artscii.list_canvases()
+      [%Artscii.Canvas{id: "michelangelo"}, %Artscii.Canvas{id: "rafael"}]
+
+  """
+  def list_canvases do
+    store().list()
   end
 end

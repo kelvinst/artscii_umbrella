@@ -32,4 +32,11 @@ defmodule Artscii.DetsStore do
       [] -> {:error, :not_found}
     end
   end
+
+  @impl Store
+  def list do
+    fn({_, canvas}, acc) -> [canvas | acc] end
+    |> :dets.foldl([], :canvases)
+    |> Enum.sort_by(&Map.get(&1, :id))
+  end
 end
