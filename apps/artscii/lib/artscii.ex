@@ -1,9 +1,12 @@
 defmodule Artscii do
   @moduledoc """
-  Artscii keeps the contexts that define your domain
-  and business logic.
+  Artscii is a simple tool to create ASCII arts on a canvas.
 
-  Contexts are also responsible for managing your data, regardless
-  if it comes from the database, an external API or others.
+  You start off calling `new_canvas/1` passing the canvas unique id, 
+  which will return you an empty `%Artscii.Canvas{}` and set its id:
+
+      iex> Artscii.new_canvas("unique")
+      %Artscii.Canvas{id: "unique"}
+
   """
 end
