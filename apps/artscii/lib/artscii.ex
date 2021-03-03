@@ -14,12 +14,17 @@ defmodule Artscii do
   alias Artscii.Canvas
 
   @doc """
-  Creates a new `%Canvas{}` with the given `id` and returns it
+  Creates a new `%Canvas{}` with the given `id`, persist and returns it
+
+  Raises an `ArgumentError` if the `id` is already taken
 
   ## Examples
 
       iex> Artscii.new_canvas("picasso")
       %Artscii.Canvas{id: "picasso"}
+      
+      iex> Artscii.new_canvas("picasso")
+      ** (ArgumentError) id "picasso" has already been taken
       
   """
   def new_canvas(id) do
