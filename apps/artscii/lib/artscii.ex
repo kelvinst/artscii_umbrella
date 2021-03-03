@@ -40,4 +40,25 @@ defmodule Artscii do
   def create_canvas(id) do
     store().create(%Canvas{id: id})
   end
+
+  @doc """
+  Gets an existing `%Canvas{}` by its `id`
+
+  Returns `{:ok, canvas}` if it passes, or `{:error, :not_found}` if 
+  no canvas with the `id` does not exist
+
+  ## Examples
+  
+      iex> Artscii.create_canvas("aleijadinho")
+      iex> Artscii.fetch_canvas("aleijadinho")
+      {:ok, %Artscii.Canvas{id: "aleijadinho"}}
+
+      iex> Artscii.fetch_canvas("bla")
+      {:error, :not_found}
+      
+  """
+  @spec fetch_canvas(Canvas.id()) :: {:ok, Canvas.t()} | {:error, :not_found}
+  def fetch_canvas(id) do
+    store().fetch(id)
+  end
 end
