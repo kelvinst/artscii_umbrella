@@ -9,7 +9,8 @@
 # move said applications out of the umbrella.
 use Mix.Config
 
-config :artscii, store: Artscii.EtsStore
+# let's use DETS to persist our canvases to disk
+config :artscii, store: Artscii.DetsStore
 
 config :artscii_web,
   generators: [context_app: :artscii]

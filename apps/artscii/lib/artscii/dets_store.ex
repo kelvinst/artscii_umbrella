@@ -1,6 +1,6 @@
-defmodule Artscii.EtsStore do
+defmodule Artscii.DetsStore do
   @moduledoc """
-  Persistence store that stores canvases on a ETS table.
+  Persistence store that stores canvases on a DETS table.
   """
 
   alias Artscii.Store
@@ -8,11 +8,11 @@ defmodule Artscii.EtsStore do
   @behaviour Store
 
   @impl Store
-  def init, do: :ets.new(:canvases, [:named_table, :set, :public])
+  def init, do: :dets.open_file(:canvases, [file: 'canvases.dets', type: :set])
 
   @impl Store
   def create(canvas) do
-    if :ets.insert_new(:canvases, {canvas.id, canvas}) do
+    if :dets.insert_new(:canvases, {canvas.id, canvas}) do
       {:ok, canvas}
     else
       {:error, :already_exists}
@@ -21,13 +21,13 @@ defmodule Artscii.EtsStore do
 
   @impl Store
   def save(canvas) do
-    :ets.insert(:canvases, {canvas.id, canvas})
+    :dets.insert(:canvases, {canvas.id, canvas})
     {:ok, canvas}
   end
 
   @impl Store
   def fetch(id) do
-    case :ets.lookup(:canvases, id) do
+    case :dets.lookup(:canvases, id) do
       [{^id, canvas}] -> {:ok, canvas}
       [] -> {:error, :not_found}
     end
