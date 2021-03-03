@@ -2,11 +2,11 @@ defmodule Artscii do
   @moduledoc """
   Artscii is a simple tool to create ASCII arts on a canvas.
 
-  You start off calling `new_canvas/1` passing the canvas id, 
+  You start off calling `create_canvas/1` passing the canvas id, 
   which will return you an empty `%Artscii.Canvas{}` and set the id 
   you sent:
 
-      iex> Artscii.new_canvas("davinci")
+      iex> Artscii.create_canvas("davinci")
       {:ok, %Artscii.Canvas{id: "davinci"}}
 
   """
@@ -30,15 +30,14 @@ defmodule Artscii do
 
   ## Examples
 
-      iex> Artscii.new_canvas("picasso")
+      iex> Artscii.create_canvas("picasso")
       {:ok, %Artscii.Canvas{id: "picasso"}}
-      
-      iex> Artscii.new_canvas("picasso")
+      iex> Artscii.create_canvas("picasso")
       {:error, :already_exists}
       
   """
-  @spec new_canvas(Canvas.id()) :: Canvas.t()
-  def new_canvas(id) do
+  @spec create_canvas(Canvas.id()) :: {:ok, Canvas.t()} | {:error, :already_exists}
+  def create_canvas(id) do
     store().create(%Canvas{id: id})
   end
 end
