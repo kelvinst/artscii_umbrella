@@ -7,11 +7,11 @@ defmodule Artscii.Application do
 
   def start(_type, _args) do
     children = [
-      # Start the PubSub system
       {Phoenix.PubSub, name: Artscii.PubSub}
-      # Start a worker by calling: Artscii.Worker.start_link(arg)
-      # {Artscii.Worker, arg}
     ]
+
+    Artscii.store().init()
+
 
     Supervisor.start_link(children, strategy: :one_for_one, name: Artscii.Supervisor)
   end
