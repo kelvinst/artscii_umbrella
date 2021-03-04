@@ -4,7 +4,10 @@ defmodule ArtsciiWeb.Router do
   and sending them to the correct place
   """
 
-  use ArtsciiWeb, :router
+  use Phoenix.Router
+
+  import Plug.Conn
+  import Phoenix.Controller
 
   pipeline :api do
     plug :accepts, ["json"]

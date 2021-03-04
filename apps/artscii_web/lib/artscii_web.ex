@@ -31,15 +31,6 @@ defmodule ArtsciiWeb do
     end
   end
 
-  def router do
-    quote do
-      use Phoenix.Router
-
-      import Plug.Conn
-      import Phoenix.Controller
-    end
-  end
-
   def channel do
     quote do
       use Phoenix.Channel
