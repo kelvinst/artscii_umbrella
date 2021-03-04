@@ -35,7 +35,7 @@ defmodule Artscii.EtsStore do
 
   @impl Store
   def list do
-    :ets.foldl(fn {_, canvas}, acc -> [canvas | acc] end, [], :canvases)
+    :ets.foldr(fn {_, canvas}, acc -> [canvas | acc] end, [], :canvases)
   end
 
   @impl Store

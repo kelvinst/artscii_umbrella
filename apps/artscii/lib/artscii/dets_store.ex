@@ -36,7 +36,7 @@ defmodule Artscii.DetsStore do
   @impl Store
   def list do
     fn {_, canvas}, acc -> [canvas | acc] end
-    |> :dets.foldl([], :canvases)
+    |> :dets.foldr([], :canvases)
     |> Enum.sort_by(&Map.get(&1, :id))
   end
 
