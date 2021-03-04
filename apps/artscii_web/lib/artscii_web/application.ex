@@ -6,24 +6,24 @@ defmodule ArtsciiWeb.Application do
 
   use Application
 
+  @doc """
+  Starts the application
+  """
   def start(_type, _args) do
     children = [
-      # Start the Telemetry supervisor
       ArtsciiWeb.Telemetry,
-      # Start the Endpoint (http/https)
       ArtsciiWeb.Endpoint
-      # Start a worker by calling: ArtsciiWeb.Worker.start_link(arg)
-      # {ArtsciiWeb.Worker, arg}
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: ArtsciiWeb.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
-  # Tell Phoenix to update the endpoint configuration
-  # whenever the application is updated.
+  @doc """
+  Updates the endpoint configuration
+
+  This function is a callback called by Elixir after a code upgrade
+  """
   def config_change(changed, _new, removed) do
     ArtsciiWeb.Endpoint.config_change(changed, removed)
     :ok
