@@ -3,7 +3,9 @@ defmodule ArtsciiWeb.ErrorView do
   The view that renders errors
   """
 
-  use ArtsciiWeb, :view
+  use Phoenix.View,
+    root: "lib/artscii_web/templates",
+    namespace: ArtsciiWeb
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.
