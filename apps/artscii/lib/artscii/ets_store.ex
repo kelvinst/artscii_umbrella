@@ -3,6 +3,8 @@ defmodule Artscii.EtsStore do
   Persistence store that stores canvases on a ETS table.
   """
 
+  import Ecto.Changeset
+
   alias Artscii.Store
 
   @behaviour Store
@@ -11,18 +13,22 @@ defmodule Artscii.EtsStore do
   def init, do: :ets.new(:canvases, [:named_table, :ordered_set, :public])
 
   @impl Store
-  def create(canvas) do
-    if :ets.insert_new(:canvases, {canvas.id, canvas}) do
-      {:ok, canvas}
-    else
-      {:error, :already_exists}
+  def create(changeset) do
+    with {:ok, canvas} <- apply_action(changeset, :create) do
+      if :ets.insert_new(:canvases, {canvas.id, canvas}) do
+        {:ok, canvas}
+      else
+        {:error, add_error(changeset, :id, "already exists")}
+      end
     end
   end
 
   @impl Store
-  def save(canvas) do
-    :ets.insert(:canvases, {canvas.id, canvas})
-    {:ok, canvas}
+  def save(changeset) do
+    with {:ok, canvas} <- apply_action(changeset, :save) do
+      :ets.insert(:canvases, {canvas.id, canvas})
+      {:ok, canvas}
+    end
   end
 
   @impl Store

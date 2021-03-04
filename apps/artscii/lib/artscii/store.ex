@@ -9,6 +9,7 @@ defmodule Artscii.Store do
   """
 
   alias Artscii.Canvas
+  alias Ecto.Changeset
 
   @doc """
   Inits the persistence layer.
@@ -19,9 +20,9 @@ defmodule Artscii.Store do
   Creates the canvas.
 
   Returns `{:ok, canvas}` if it works, where `canvas` is the newly saved value,
-  or `{:error, :already_exists}` if a canvas with the same id already exists.
+  or `{:error, changeset}` if it fails for some reason.
   """
-  @callback create(Canvas.t()) :: {:ok, Canvas.t()} | {:error, :already_exists}
+  @callback create(Changeset.t()) :: {:ok, Canvas.t()} | {:error, Changeset.t()}
 
   @doc """
   Saves the canvas.
@@ -29,9 +30,10 @@ defmodule Artscii.Store do
   If a canvas with the given id already exist, it updates it,
   if not, a new one is inserted.
 
-  Always returns `{:ok, canvas}` where `canvas` is the newly saved value,
+  Returns `{:ok, canvas}` if it works, where `canvas` is the newly saved value,
+  or `{:error, changeset}` if it fails for some reason.
   """
-  @callback save(Canvas.t()) :: {:ok, Canvas.t()}
+  @callback save(Changeset.t()) :: {:ok, Canvas.t()} | {:error, Changeset.t()}
 
   @doc """
   Fetch the canvas by it's `id`.

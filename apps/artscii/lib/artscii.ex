@@ -32,13 +32,16 @@ defmodule Artscii do
 
       iex> Artscii.create_canvas("picasso")
       {:ok, %Artscii.Canvas{id: "picasso"}}
-      iex> Artscii.create_canvas("picasso")
-      {:error, :already_exists}
+      iex> {:error, %Ecto.Changeset{errors: errors}} = Artscii.create_canvas("picasso")
+      iex> errors
+      [id: {"already exists", []}]
       
   """
-  @spec create_canvas(Canvas.id()) :: {:ok, Canvas.t()} | {:error, :already_exists}
+  @spec create_canvas(Canvas.id()) :: {:ok, Canvas.t()} | {:error, Ecto.Changeset.t()}
   def create_canvas(id) do
-    store().create(%Canvas{id: id})
+    %Canvas{id: id}
+    |> Canvas.changeset()
+    |> store().create()
   end
 
   @doc """
@@ -58,9 +61,7 @@ defmodule Artscii do
       
   """
   @spec fetch_canvas(Canvas.id()) :: {:ok, Canvas.t()} | {:error, :not_found}
-  def fetch_canvas(id) do
-    store().fetch(id)
-  end
+  def fetch_canvas(id), do: store().fetch(id)
 
   @doc """
   Lists all saved canvases
@@ -73,7 +74,5 @@ defmodule Artscii do
       [%Artscii.Canvas{id: "michelangelo"}, %Artscii.Canvas{id: "rafael"}]
 
   """
-  def list_canvases do
-    store().list()
-  end
+  def list_canvases, do: store().list()
 end

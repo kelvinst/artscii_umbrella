@@ -9,7 +9,7 @@ defmodule ArtsciiTest do
       assert canvas.id == "id"
       assert canvas.height == 20
       assert canvas.width == 20
-      assert canvas.drawing_operations == []
+      assert canvas.drawings == []
     end
   end
 end

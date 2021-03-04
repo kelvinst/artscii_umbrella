@@ -36,6 +36,7 @@ defmodule Artscii.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:ecto, "~> 3.0"},
       {:phoenix_pubsub, "~> 2.0"}
     ]
   end

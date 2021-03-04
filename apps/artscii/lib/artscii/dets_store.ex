@@ -3,6 +3,8 @@ defmodule Artscii.DetsStore do
   Persistence store that stores canvases on a DETS table.
   """
 
+  import Ecto.Changeset
+
   alias Artscii.Store
 
   @behaviour Store
@@ -11,18 +13,22 @@ defmodule Artscii.DetsStore do
   def init, do: :dets.open_file(:canvases, file: 'canvases.dets', type: :set)
 
   @impl Store
-  def create(canvas) do
-    if :dets.insert_new(:canvases, {canvas.id, canvas}) do
-      {:ok, canvas}
-    else
-      {:error, :already_exists}
+  def create(changeset) do
+    with {:ok, canvas} <- apply_action(changeset, :create) do
+      if :dets.insert_new(:canvases, {canvas.id, canvas}) do
+        {:ok, canvas}
+      else
+        {:error, add_error(changeset, :id, "already exists")}
+      end
     end
   end
 
   @impl Store
-  def save(canvas) do
-    :dets.insert(:canvases, {canvas.id, canvas})
-    {:ok, canvas}
+  def save(changeset) do
+    with {:ok, canvas} <- apply_action(changeset, :save) do
+      :dets.insert(:canvases, {canvas.id, canvas})
+      {:ok, canvas}
+    end
   end
 
   @impl Store
