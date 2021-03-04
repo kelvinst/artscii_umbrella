@@ -5,7 +5,6 @@ defmodule ArtsciiWeb do
 
   This can be used in your application as:
 
-      use ArtsciiWeb, :controller
       use ArtsciiWeb, :view
 
   The definitions below will be executed for every view,
@@ -16,15 +15,6 @@ defmodule ArtsciiWeb do
   below. Instead, define any helper function in modules
   and import those modules here.
   """
-
-  def controller do
-    quote do
-      use Phoenix.Controller, namespace: ArtsciiWeb
-
-      import Plug.Conn
-      alias ArtsciiWeb.Router.Helpers, as: Routes
-    end
-  end
 
   def view do
     quote do
