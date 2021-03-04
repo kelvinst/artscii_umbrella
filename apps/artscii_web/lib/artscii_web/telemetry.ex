@@ -1,5 +1,8 @@
 defmodule ArtsciiWeb.Telemetry do
-  @moduledoc false
+  @moduledoc """
+  This is the telemetry supervisor, it is responsible to configure, 
+  start and supervise telemetry processes
+  """
 
   use Supervisor
   import Telemetry.Metrics

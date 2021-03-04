@@ -1,7 +1,8 @@
 defmodule Artscii.Application do
-  # See https://hexdocs.pm/elixir/Application.html
-  # for more information on OTP Applications
-  @moduledoc false
+  @moduledoc """
+  This module has the function that is executed when starting
+  the artscii application (and the helpers for it)
+  """
 
   use Application
 

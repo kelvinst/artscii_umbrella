@@ -1,3 +1,2 @@
 # Artscii
 
-**TODO: Add description**

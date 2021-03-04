@@ -7,7 +7,16 @@ defmodule Artscii.Umbrella.MixProject do
       version: "0.1.0",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      aliases: aliases()
+      aliases: aliases(),
+
+      # Docs
+      name: "Artscii",
+      source_url: "https://github.com/kelvinst/artscii_umbrella",
+      docs: [
+        main: "readme",
+        logo: "priv/static/images/logo.png",
+        extras: ["README.md"]
+      ]
     ]
   end
 
@@ -25,7 +34,8 @@ defmodule Artscii.Umbrella.MixProject do
   # and cannot be accessed from applications inside the apps/ folder.
   defp deps do
     [
-      {:credo, "~> 1.4", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false}
     ]
   end
 

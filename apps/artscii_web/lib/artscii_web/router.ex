@@ -1,4 +1,9 @@
 defmodule ArtsciiWeb.Router do
+  @moduledoc """
+  The router is the responsible for managing incoming requests 
+  and sending them to the correct place
+  """
+
   use ArtsciiWeb, :router
 
   pipeline :api do

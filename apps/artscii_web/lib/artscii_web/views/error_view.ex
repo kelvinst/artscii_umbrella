@@ -1,4 +1,8 @@
 defmodule ArtsciiWeb.ErrorView do
+  @moduledoc """
+  The view that renders errors
+  """
+
   use ArtsciiWeb, :view
 
   # If you want to customize a particular status code

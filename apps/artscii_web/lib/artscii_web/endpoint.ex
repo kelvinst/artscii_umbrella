@@ -1,4 +1,13 @@
 defmodule ArtsciiWeb.Endpoint do
+  @moduledoc """
+  The endpoint is the starting point for the web app.
+
+  Here we configure the plugs that are going to apply to 
+  every request.
+
+  Note: the plugs in here are executed sequentially.
+  """
+
   use Phoenix.Endpoint, otp_app: :artscii_web
 
   # The session will be stored in the cookie and signed,

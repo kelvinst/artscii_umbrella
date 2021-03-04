@@ -1,4 +1,8 @@
 defmodule ArtsciiWeb.UserSocket do
+  @moduledoc """
+  The entrypoint for websocket connections
+  """
+
   use Phoenix.Socket
 
   ## Channels
